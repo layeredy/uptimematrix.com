@@ -9,13 +9,13 @@ function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
 function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
-    for(let i=0; i < ca.length; i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
@@ -35,8 +35,9 @@ function setTheme(isDark) {
     }
 }
 
+// Default to dark mode if there's no saved theme
 const savedTheme = getCookie('theme');
-setTheme(savedTheme === 'dark');
+setTheme(savedTheme !== 'light');
 
 themeToggle.addEventListener('click', () => {
     const isDarkMode = body.classList.toggle('dark-mode');
